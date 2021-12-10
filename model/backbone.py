@@ -100,13 +100,13 @@ class RegsegBackbone(nn.Module):
                 ((1,14), 1, 256, 256, 6),
                 ((1,14), 1, 256, 320, 1)
             ]
-        conv0 = nn.Conv2d(in_channels=3,
+        conv = nn.Conv2d(in_channels=3,
                           out_channels=32,
                           stride=2,
                           kernel_size=3,
                           padding=1)
         backbone = []
-        backbone.append(conv0)
+        backbone.append(conv)
         for i, param in enumerate(params):
             if i == 0:
                 size = math.ceil(im_size / 4)
