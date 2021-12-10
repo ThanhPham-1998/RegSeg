@@ -74,8 +74,8 @@ class DBlock(nn.Module):
     
     def forward(self, input):
         branch_a = self.relu(self.bn1a(self.conv1a(input)))
-        branch_a1 = self.relu(self.bn_group1(self.group1(branch_a[:,: self.out_channels // 2,:,:])))
-        branch_a2 = self.relu(self.bn_group2(self.group2(branch_a[:,: self.out_channels // 2:,:,:])))
+        branch_a1 = self.relu(self.bn_group1(self.group1(branch_a[:,:self.out_channels // 2,:,:])))
+        branch_a2 = self.relu(self.bn_group2(self.group2(branch_a[:,self.out_channels // 2:,:,:])))
         branch_a = torch.cat([branch_a1, branch_a2], 1)
         branch_a = self.se_block(branch_a)
         branch_a = self.relu(self.bn2a(self.conv2a(branch_a)))
